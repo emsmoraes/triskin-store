@@ -1,10 +1,17 @@
-import { Button } from "./shared/components/ui/button";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./shared/services";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./routes";
+import { Toaster } from "sonner";
 
 function App() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <Button>Ola mundo</Button>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Router />
+        <Toaster />
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

@@ -21,7 +21,7 @@ export const getProductById = async (id: string): Promise<Product> => {
 };
 
 export const createProduct = async (
-  product: Omit<Product, "id" | "createdAt">
+  product: Omit<Product, "id">
 ): Promise<Product> => {
   try {
     const { data } = await api.post<Product>("/products", product);

@@ -1,0 +1,57 @@
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import ProductList from ".";
+import type { Product } from "@/shared/interfaces";
+
+describe("ProductList", () => {
+  const mockProducts: Product[] = [
+    {
+      id: 1,
+      title: "Produto 1",
+      price: 10.5,
+      description: "Descrição do produto 1",
+      category: "Categoria 1",
+      image: "https://example.com/image1.jpg",
+    },
+    {
+      id: 2,
+      title: "Produto 2",
+      price: 20,
+      description: "Descrição do produto 2",
+      category: "Categoria 2",
+      image: "https://example.com/image2.jpg",
+    },
+  ];
+
+  it("should show loading state when isLoading is true", () => {
+    render(<ProductList isLoading={true} error={null} data={undefined} />);
+    expect(screen.getByText("Carregando produtos...")).toBeInTheDocument();
+  });
+
+  it("should show error state when error is present", () => {
+    render(
+      <ProductList
+        isLoading={false}
+        error={new Error("Erro")}
+        data={undefined}
+      />
+    );
+    expect(screen.getByText("Erro ao carregar produtos.")).toBeInTheDocument();
+  });
+
+  it("should render list of products when data is provided", () => {
+    render(<ProductList isLoading={false} error={null} data={mockProducts} />);
+    expect(screen.getByText("Produto 1")).toBeInTheDocument();
+    expect(screen.getByText("Produto 2")).toBeInTheDocument();
+
+    const images = screen.getAllByRole("img");
+    expect(images).toHaveLength(2);
+    expect(images[0]).toHaveAttribute("src", mockProducts[0].image);
+    expect(images[1]).toHaveAttribute("src", mockProducts[1].image);
+  });
+
+  it("should show empty state when data is empty", () => {
+    render(<ProductList isLoading={false} error={null} data={[]} />);
+    expect(screen.getByText("Nenhum produto encontrado.")).toBeInTheDocument();
+  });
+});

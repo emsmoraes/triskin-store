@@ -23,9 +23,10 @@ describe("ProductList", () => {
     },
   ];
 
-  it("should show loading state when isLoading is true", () => {
+  it("should show loading skeleton when isLoading is true", () => {
     render(<ProductList isLoading={true} error={null} data={undefined} />);
-    expect(screen.getByText("Carregando produtos...")).toBeInTheDocument();
+    const skeletonContainer = screen.getByTestId("skeleton-container");
+    expect(skeletonContainer).toBeInTheDocument();
   });
 
   it("should show error state when error is present", () => {

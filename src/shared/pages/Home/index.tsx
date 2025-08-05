@@ -32,6 +32,14 @@ function Home() {
         newProduct,
       ]);
     },
+    onError: () => {
+      ErrorMessage({
+        message: "Erro ao criar produto",
+        description: "Não foi possível criar o produto. Tente novamente.",
+        actionLabel: "Tentar de novo",
+        onActionClick: () => handleCreateProduct(),
+      });
+    }
   });
 
   const handleCreateProduct = () => {

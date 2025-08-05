@@ -1,4 +1,4 @@
-import { useScrollDirection } from "@/layouts/DashboardLayout/hooks/useScrollDirection";
+import { useScrollDirection } from "@/shared/components/Header/hooks/useScrollDirection";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {

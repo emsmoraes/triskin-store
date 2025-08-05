@@ -1,9 +1,18 @@
-import React from 'react'
+import { TbLoader2 } from "react-icons/tb";
+import { cn } from "@/lib/utils";
 
-function Loader() {
-  return (
-    <div>Loader</div>
-  )
+interface LoaderProps {
+  size?: number;
+  className?: string;
 }
 
-export default Loader
+function Loader({ size = 32, className }: LoaderProps) {
+  return (
+    <TbLoader2
+      size={size}
+      className={cn("animate-spin text-[#fb7185]", className)}
+    />
+  );
+}
+
+export default Loader;

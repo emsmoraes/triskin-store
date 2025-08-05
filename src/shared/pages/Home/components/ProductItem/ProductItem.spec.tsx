@@ -8,7 +8,6 @@ describe("ProductItem", () => {
     id: 1,
     title: "Premium Face Cream",
     price: 89.99,
-    description: "Creme facial premium",
     category: "Skincare",
     image: "https://example.com/image.jpg",
   };

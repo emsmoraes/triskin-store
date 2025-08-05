@@ -1,9 +1,10 @@
 import type { Product } from "@/shared/interfaces";
 import { Button } from "@/shared/components/ui/button";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Trash2, Plus } from "lucide-react";
 import { formatPriceBRL } from "@/shared/utils/formatPriceBRL";
 import { TbPhotoOff } from "react-icons/tb";
 import { cn } from "@/lib/utils";
+import EditProductButton from "../EditProductButton";
 
 interface ProductItemProps {
   product: Product;
@@ -45,9 +46,11 @@ function ProductItem({ product }: ProductItemProps) {
             {isActive ? "Ativo" : "Inativo"}
           </span>
           <div className="flex gap-2">
-            <Button variant="ghost" size="icon">
-              <Pencil className="w-5 h-5 text-zinc-600" />
-            </Button>
+            <EditProductButton defaultValues={{
+              title: product.title,
+              price: product.price,
+              image: product.image,
+            }}/>
             <Button variant="ghost" size="icon">
               <Trash2 className="w-5 h-5 text-red-500" />
             </Button>

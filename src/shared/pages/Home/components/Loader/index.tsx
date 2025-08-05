@@ -11,6 +11,7 @@ function Loader({ size = 32, className, active = true }: LoaderProps) {
   if (!active) return null;
   return (
     <TbLoader2
+      data-testid="loader-icon"
       size={size}
       className={cn("animate-spin text-[#fb7185]", className)}
     />

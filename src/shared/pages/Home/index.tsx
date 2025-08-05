@@ -1,9 +1,5 @@
-import React from 'react'
-
 function Home() {
-  return (
-    <div>Home</div>
-  )
+  return <div className="w-full h-[3000px] p-4">Home</div>;
 }
 
-export default Home
+export default Home;

@@ -14,8 +14,8 @@ function Home() {
 
   return (
     <div className="w-full p-4 flex items-center gap-2">
-      <Button onClick={handleError}>
-        <Loader className="text-blue-300" size={20} active={true} />
+      <Button variant={"gradient"} onClick={handleError}>
+        <Loader className="text-white" size={20} active={true} />
         Home
       </Button>
     </div>

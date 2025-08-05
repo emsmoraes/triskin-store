@@ -4,9 +4,11 @@ import { cn } from "@/lib/utils";
 interface LoaderProps {
   size?: number;
   className?: string;
+  active: boolean;
 }
 
-function Loader({ size = 32, className }: LoaderProps) {
+function Loader({ size = 32, className, active = true }: LoaderProps) {
+  if (!active) return null;
   return (
     <TbLoader2
       size={size}

@@ -1,9 +1,25 @@
-import React from 'react'
+import { toast } from "sonner";
 
-function ErrorMessage() {
-  return (
-    <div>ErrorMessage</div>
-  )
+interface ErrorMessageProps {
+  message: string;
+  description?: string;
+  actionLabel?: string;
+  onActionClick?: () => void;
 }
 
-export default ErrorMessage
+export function ErrorMessage({
+  message,
+  description,
+  actionLabel,
+  onActionClick,
+}: ErrorMessageProps) {
+  return toast.error(message, {
+    description,
+    action: actionLabel
+      ? {
+          label: actionLabel,
+          onClick: onActionClick ?? (() => {}),
+        }
+      : undefined,
+  });
+}

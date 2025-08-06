@@ -54,6 +54,7 @@ npm test
 - **Filtragem:** Para filtragem da lista, preferi filtrar apenas o array em memória, já que o número de itens é pequeno e isso não impacta a performance; em cenários com grandes volumes, implementaria a filtragem via API.
 - **Formulários:** Utilizei React Hook Form com Zod para um controle mais robusto e seguro dos formulários.
 - **Carrinho:** No carrinho, mantive a lógica simples: um item é considerado o mesmo apenas se id, título, preço e imagem forem idênticos. Assim, qualquer alteração em um desses campos gera um novo item, mesmo que o anterior permaneça.
+- **Persistência do carrinho:** Todos os produtos do carrinho são salvos no localStorage e sincronizados com o Zustand, garantindo persistência entre sessões. Essa abordagem foi adotada por se tratar de um volume de dados baixo, o que não causa problemas de performance.
 - **React Query:** Escolhi o React Query pela praticidade, eliminando a necessidade de criar estados e funções manuais para requisições, além de contar com seu cache eficiente que otimiza o carregamento de dados.
 
 ## 🤝 Criador

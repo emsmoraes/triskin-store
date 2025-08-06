@@ -20,11 +20,11 @@ const Header = () => {
   ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}
 `}
     >
-      <div className="flex items-center gap-2">
-        <div
-          className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-xl bg-gradient-to-r from-orange-500 to-pink-500 cursor-pointer"
-          onClick={() => navigate("/")}
-        >
+      <div
+        className="flex items-center gap-2 cursor-pointer "
+        onClick={() => navigate("/")}
+      >
+        <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-xl bg-gradient-to-r from-orange-500 to-pink-500 ">
           TS
         </div>
         <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">

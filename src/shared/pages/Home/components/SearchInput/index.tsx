@@ -18,10 +18,10 @@ function SearchInput({ setSearchValue }: SearchInputProps) {
     <div className="relative max-w-[800px] rounded-full p-[1px] bg-gradient-to-r from-orange-500 to-pink-500">
       <Input
         onChange={(e) => onInputWithDebouncing(e.target.value)}
-        className="pl-10 pr-4 rounded-full h-[50px] bg-white border-none focus-visible:ring-0 focus-visible:ring-offset-0 "
+        className="pl-12 pr-4 rounded-full h-[50px] bg-white border-none focus-visible:ring-0 focus-visible:ring-offset-0 md:text-lg"
         placeholder="Buscar produto"
       />
-      <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800" />
+      <SearchIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800" />
     </div>
   );
 }

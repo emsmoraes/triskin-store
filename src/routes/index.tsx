@@ -3,12 +3,14 @@ import { Route, Routes } from "react-router-dom";
 
 import Home from "@/shared/pages/Home";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
+import CartPage from "@/shared/pages/CartPage";
 
 export function Router(): ReactElement {
   return (
     <Routes>
       <Route element={<DashboardLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
     </Routes>
   );

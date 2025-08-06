@@ -6,6 +6,8 @@ import { TbPhotoOff } from "react-icons/tb";
 import { cn } from "@/lib/utils";
 import EditProductModal from "../EditProductModal";
 import { useCartStore } from "@/shared/stores/useCartStore";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface ProductItemProps {
   product: Product;
@@ -13,8 +15,19 @@ interface ProductItemProps {
 
 function ProductItem({ product }: ProductItemProps) {
   const isActive = !(product.price % 2 === 0);
+  const navigate = useNavigate();
 
   const addItem = useCartStore((state) => state.addItem);
+
+  const handleAddToCart = () => {
+    addItem(product);
+    toast.success("Produto adicionado ao carrinho!", {
+      action: {
+        label: "Ver carrinho",
+        onClick: () => navigate("/cart"),
+      },
+    });
+  };
 
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm flex flex-col gap-4 max-w-md mx-auto w-full group">
@@ -64,7 +77,7 @@ function ProductItem({ product }: ProductItemProps) {
       <Button
         variant={"gradient"}
         className="w-full flex items-center gap-2  hover:bg-zinc-800"
-        onClick={() => addItem(product)}
+        onClick={handleAddToCart}
       >
         <Plus className="w-5 h-5" />
         Adicionar ao carrinho

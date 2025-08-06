@@ -72,7 +72,3 @@ Feito com ❤️ por Eduardo Meneses para a Triskin:
     </td>
   </tr>
 </table>
-
-## 📝 Licença
-
-Este projeto está sob licença. Veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.

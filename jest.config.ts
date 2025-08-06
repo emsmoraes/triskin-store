@@ -10,7 +10,7 @@ export default {
     },
   },
   moduleNameMapper: {
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
-    '^@/(.*)$': '<rootDir>/src/$1', // resolve imports com "@/"
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/src/test/__mocks__/fileMock.js',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
 };

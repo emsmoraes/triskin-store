@@ -39,14 +39,13 @@ function Home() {
         actionLabel: "Tentar de novo",
         onActionClick: () => handleCreateProduct(),
       });
-    }
+    },
   });
 
   const handleCreateProduct = () => {
     createProductMutation.mutate({
       title: "Produto de Teste",
       price: 99.9,
-      description: "Descrição do produto de teste",
       category: "electronics",
       image: "https://i.pravatar.cc/300",
     });

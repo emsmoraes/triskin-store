@@ -32,7 +32,7 @@ export const createProduct = async (
 };
 
 export const updateProduct = async (
-  id: string,
+  id: number,
   product: Partial<Product>
 ): Promise<Product> => {
   try {

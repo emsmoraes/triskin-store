@@ -46,11 +46,11 @@ function ProductItem({ product }: ProductItemProps) {
             {isActive ? "Ativo" : "Inativo"}
           </span>
           <div className="flex gap-2">
-            <EditProductButton defaultValues={{
+            <EditProductButton productId={product.id} defaultValues={{
               title: product.title,
               price: product.price,
               image: product.image,
-            }}/>
+            }} />
             <Button variant="ghost" size="icon">
               <Trash2 className="w-5 h-5 text-red-500" />
             </Button>

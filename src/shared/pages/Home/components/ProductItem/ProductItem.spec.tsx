@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ProductItem from ".";
 import type { Product } from "@/shared/interfaces";
+import { renderWithQueryClient } from "@/test/test-utils";
 
 describe("ProductItem", () => {
   const mockProduct: Product = {
@@ -13,7 +14,10 @@ describe("ProductItem", () => {
   };
 
   it("should render product title, price and image", () => {
-    render(<ProductItem product={mockProduct} />);
+    renderWithQueryClient
+      ? renderWithQueryClient(<ProductItem product={mockProduct} />)
+      : render(<ProductItem product={mockProduct} />);
+
     expect(screen.getByText(mockProduct.title)).toBeInTheDocument();
     expect(screen.getByText(/R\$\s*89,99/)).toBeInTheDocument();
 
@@ -23,19 +27,27 @@ describe("ProductItem", () => {
   });
 
   it("should render fallback when image is missing", () => {
-    render(<ProductItem product={{ ...mockProduct, image: "" }} />);
+    renderWithQueryClient
+      ? renderWithQueryClient(
+          <ProductItem product={{ ...mockProduct, image: "" }} />
+        )
+      : render(<ProductItem product={{ ...mockProduct, image: "" }} />);
     expect(screen.getByText("Sem imagem")).toBeInTheDocument();
   });
 
   it("should render action buttons", () => {
-    render(<ProductItem product={mockProduct} />);
+    renderWithQueryClient
+      ? renderWithQueryClient(<ProductItem product={mockProduct} />)
+      : render(<ProductItem product={mockProduct} />);
     expect(
-      screen.getByRole("button", { name: /add to cart/i })
+      screen.getByRole("button", { name: /adicionar ao carrinho/i })
     ).toBeInTheDocument();
   });
 
-  it("should render 'Active' badge", () => {
-    render(<ProductItem product={mockProduct} />);
-    expect(screen.getByText("Active")).toBeInTheDocument();
+  it("should render 'Ativo' badge", () => {
+    renderWithQueryClient
+      ? renderWithQueryClient(<ProductItem product={mockProduct} />)
+      : render(<ProductItem product={mockProduct} />);
+    expect(screen.getByText("Ativo")).toBeInTheDocument();
   });
 });

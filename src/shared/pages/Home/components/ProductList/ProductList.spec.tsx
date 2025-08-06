@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { screen } from "@testing-library/react";
 import ProductList from ".";
 import type { Product } from "@/shared/interfaces";
+import { renderWithQueryClient } from "@/test/test-utils";
 
 describe("ProductList", () => {
   const mockProducts: Product[] = [
@@ -22,24 +23,29 @@ describe("ProductList", () => {
   ];
 
   it("should show loading skeleton when isLoading is true", () => {
-    render(<ProductList isLoading={true} error={null} data={undefined} />);
-    const skeletonContainer = screen.getByTestId("skeleton-container");
-    expect(skeletonContainer).toBeInTheDocument();
+    renderWithQueryClient(
+      <ProductList isLoading={true} error={null} data={undefined} />
+    );
+    expect(screen.getByTestId("skeleton-container")).toBeInTheDocument();
   });
 
   it("should show error state when error is present", () => {
-    render(
+    renderWithQueryClient(
       <ProductList
         isLoading={false}
         error={new Error("Erro")}
         data={undefined}
       />
     );
-    expect(screen.getByText("Erro ao carregar produtos.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Erro ao carregar produtos.")
+    ).toBeInTheDocument();
   });
 
   it("should render list of products when data is provided", () => {
-    render(<ProductList isLoading={false} error={null} data={mockProducts} />);
+    renderWithQueryClient(
+      <ProductList isLoading={false} error={null} data={mockProducts} />
+    );
     expect(screen.getByText("Produto 1")).toBeInTheDocument();
     expect(screen.getByText("Produto 2")).toBeInTheDocument();
 
@@ -50,7 +56,11 @@ describe("ProductList", () => {
   });
 
   it("should show empty state when data is empty", () => {
-    render(<ProductList isLoading={false} error={null} data={[]} />);
-    expect(screen.getByText("Nenhum produto encontrado.")).toBeInTheDocument();
+    renderWithQueryClient(
+      <ProductList isLoading={false} error={null} data={[]} />
+    );
+    expect(
+      screen.getByText("Nenhum produto encontrado.")
+    ).toBeInTheDocument();
   });
 });

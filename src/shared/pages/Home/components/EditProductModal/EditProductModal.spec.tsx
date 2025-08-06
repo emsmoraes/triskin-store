@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import EditProductModal from ".";
-import "@testing-library/jest-dom";
 import { renderWithQueryClient } from "@/test/test-utils";
+import "@testing-library/jest-dom";
 
 const defaultValues = {
   title: "Produto Teste",

@@ -54,9 +54,6 @@ function ProductItem({ product }: ProductItemProps) {
                 image: product.image,
               }}
             />
-            <Button variant="ghost" size="icon">
-              <Trash2 className="w-5 h-5 text-red-500" />
-            </Button>
           </div>
         </div>
       </div>

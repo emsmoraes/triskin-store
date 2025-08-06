@@ -1,9 +1,12 @@
 import { useScrollDirection } from "@/shared/components/Header/hooks/useScrollDirection";
 import { FaShoppingCart } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
+
+  const navigate = useNavigate();
 
   return (
     <header
@@ -17,11 +20,14 @@ const Header = () => {
 `}
     >
       <div className="flex items-center gap-2">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-xl bg-gradient-to-r from-orange-500 to-pink-500">
+        <div
+          className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-xl bg-gradient-to-r from-orange-500 to-pink-500 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           TS
         </div>
         <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-          triskin-store
+          Triskin Store
         </span>
       </div>
       <Button

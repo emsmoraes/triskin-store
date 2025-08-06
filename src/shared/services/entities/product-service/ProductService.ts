@@ -11,26 +11,6 @@ export const getProducts = async (): Promise<Product[]> => {
   }
 };
 
-export const getProductById = async (id: string): Promise<Product> => {
-  try {
-    const { data } = await api.get<Product>(`/products/${id}`);
-    return data;
-  } catch (error) {
-    handleApiError(error, "Erro ao buscar produto");
-  }
-};
-
-export const createProduct = async (
-  product: Omit<Product, "id">
-): Promise<Product> => {
-  try {
-    const { data } = await api.post<Product>("/products", product);
-    return data;
-  } catch (error) {
-    handleApiError(error, "Erro ao criar produto");
-  }
-};
-
 export const updateProduct = async (
   id: number,
   product: Partial<Product>
@@ -40,13 +20,5 @@ export const updateProduct = async (
     return data;
   } catch (error) {
     handleApiError(error, "Erro ao atualizar produto");
-  }
-};
-
-export const deleteProduct = async (id: string): Promise<void> => {
-  try {
-    await api.delete(`/products/${id}`);
-  } catch (error) {
-    handleApiError(error, "Erro ao deletar produto");
   }
 };

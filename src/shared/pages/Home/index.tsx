@@ -1,72 +1,34 @@
-import { Button } from "@/shared/components/ui/button";
-import { ErrorMessage } from "./components/ErrorMessage";
-import Loader from "./components/Loader";
 import ProductList from "./components/ProductList";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createProduct, getProducts } from "@/shared/services";
-import type { Product } from "@/shared/interfaces";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "@/shared/services";
+import { useState } from "react";
+import SearchInput from "./components/SearchInput";
 
 function Home() {
-  const { data, isLoading, error } = useQuery({
+  const [searchValue, setSearchValue] = useState("");
+
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
 
-  const queryClient = useQueryClient();
-
-  const handleError = () => {
-    ErrorMessage({
-      message: "Erro ao buscar produtos",
-      description: "Verifique sua conexão e tente novamente",
-      actionLabel: "Tentar de novo",
-      onActionClick: () => console.log("Retrying..."),
-    });
-  };
-
-  const createProductMutation = useMutation({
-    mutationFn: (product: Omit<Product, "id" | "createdAt">) =>
-      createProduct(product),
-    onSuccess: (newProduct) => {
-      queryClient.setQueryData<Product[]>(["products"], (oldData = []) => [
-        ...oldData,
-        newProduct,
-      ]);
-    },
-    onError: () => {
-      ErrorMessage({
-        message: "Erro ao criar produto",
-        description: "Não foi possível criar o produto. Tente novamente.",
-        actionLabel: "Tentar de novo",
-        onActionClick: () => handleCreateProduct(),
-      });
-    },
-  });
-
-  const handleCreateProduct = () => {
-    createProductMutation.mutate({
-      title: "Produto de Teste",
-      price: 99.9,
-      category: "electronics",
-      image: "https://i.pravatar.cc/300",
-    });
-  };
+  const filteredProducts = products?.filter((product) =>
+    product.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
-    <div className="w-full p-4 items-center gap-2">
-      <Button
-        variant={"gradient"}
-        onClick={handleCreateProduct}
-        className="mb-5 mr-4"
-      >
-        <Loader className="text-white" size={20} active={true} />
-        criar produto
-      </Button>
-      <Button variant={"gradient"} onClick={handleError} className="mb-5">
-        <Loader className="text-white" size={20} active={true} />
-        Testar erro
-      </Button>
+    <div className="w-full p-4 items-center gap-2 space-y-4">
+      <SearchInput setSearchValue={setSearchValue} />
 
-      <ProductList data={data} error={error} isLoading={isLoading} />
+      <ProductList
+        data={filteredProducts}
+        error={error}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

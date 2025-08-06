@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/shared/components/ui/button";
 import {
   Dialog,
@@ -42,6 +43,8 @@ interface EditProductModalProps {
 }
 
 function EditProductModal({ defaultValues, productId }: EditProductModalProps) {
+  const [open, setOpen] = React.useState(false); // controle do modal
+
   const form = useForm<ProductSchema>({
     resolver: zodResolver(productSchema),
     defaultValues,
@@ -58,7 +61,6 @@ function EditProductModal({ defaultValues, productId }: EditProductModalProps) {
         ["products"],
         (oldData: Product[] | undefined) => {
           if (!oldData) return [];
-
           return oldData.map((product) =>
             product.id === productId
               ? { ...product, ...updatedProduct }
@@ -66,6 +68,7 @@ function EditProductModal({ defaultValues, productId }: EditProductModalProps) {
           );
         }
       );
+      setOpen(false);
     },
     onError: () => {
       ErrorMessage({
@@ -97,16 +100,12 @@ function EditProductModal({ defaultValues, productId }: EditProductModalProps) {
     form.trigger("image");
   };
 
-  const onCloseModal = () => {
-    if (isFormDirty) form.reset();
-  };
-
   const isFormDirty = Object.keys(form.formState.dirtyFields).length > 0;
 
   return (
-    <Dialog onOpenChange={onCloseModal}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="outline" size="icon">
           <MdOutlineEdit className="w-5 h-5 text-zinc-600" />
         </Button>
       </DialogTrigger>

@@ -9,13 +9,13 @@ Para instalar o Triskin Store, siga estas etapas:
 ### 1. Clone o projeto do GitHub:
 
 ```sh
-git clone https://github.com/emsmoraes/triskin-sotore.git
+git clone https://github.com/emsmoraes/triskin-store.git
 ```
 
 ### 2. Entre na pasta do projeto:
 
 ```sh
-cd triskin-sotore
+cd triskin-store
 ```
 
 ### 3. Instale as dependências:

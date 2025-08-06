@@ -1,6 +1,4 @@
 import { useScrollDirection } from "@/shared/components/Header/hooks/useScrollDirection";
-import { FaShoppingCart } from "react-icons/fa";
-import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import CartIcon from "../CartIcon";
 

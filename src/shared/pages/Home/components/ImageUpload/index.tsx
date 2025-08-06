@@ -1,5 +1,4 @@
 import React from "react";
-import { FormMessage } from "@/shared/components/ui/form";
 
 interface ImageUploadProps {
   currentImage?: File | string | null;

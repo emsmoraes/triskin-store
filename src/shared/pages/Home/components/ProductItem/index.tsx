@@ -1,10 +1,11 @@
 import type { Product } from "@/shared/interfaces";
 import { Button } from "@/shared/components/ui/button";
-import { Trash2, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { formatPriceBRL } from "@/shared/utils/formatPriceBRL";
 import { TbPhotoOff } from "react-icons/tb";
 import { cn } from "@/lib/utils";
 import EditProductModal from "../EditProductModal";
+import { useCartStore } from "@/shared/stores/useCartStore";
 
 interface ProductItemProps {
   product: Product;
@@ -12,6 +13,8 @@ interface ProductItemProps {
 
 function ProductItem({ product }: ProductItemProps) {
   const isActive = !(product.price % 2 === 0);
+
+  const addItem = useCartStore((state) => state.addItem);
 
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm flex flex-col gap-4 max-w-md mx-auto w-full group">
@@ -61,6 +64,7 @@ function ProductItem({ product }: ProductItemProps) {
       <Button
         variant={"gradient"}
         className="w-full flex items-center gap-2  hover:bg-zinc-800"
+        onClick={() => addItem(product)}
       >
         <Plus className="w-5 h-5" />
         Adicionar ao carrinho

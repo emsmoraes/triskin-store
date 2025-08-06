@@ -2,6 +2,7 @@ import { useScrollDirection } from "@/shared/components/Header/hooks/useScrollDi
 import { FaShoppingCart } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import CartIcon from "../CartIcon";
 
 const Header = () => {
   const scrollDirection = useScrollDirection();
@@ -30,13 +31,7 @@ const Header = () => {
           Triskin Store
         </span>
       </div>
-      <Button
-        variant={"outline"}
-        size={"icon"}
-        className="p-2 rounded hover:bg-pink-50 transition "
-      >
-        <FaShoppingCart size={20} className="text-pink-500" />
-      </Button>
+      <CartIcon />
     </header>
   );
 };

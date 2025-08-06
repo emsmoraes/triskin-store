@@ -1,3 +1,4 @@
+import Footer from "@/shared/components/Footer";
 import Header from "@/shared/components/Header";
 import { Outlet } from "react-router-dom";
 
@@ -8,6 +9,7 @@ export const DashboardLayout = () => {
       <div className="max-w-[2000px] w-full min-h-full pb-7">
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Trash2, Plus } from "lucide-react";
 import { formatPriceBRL } from "@/shared/utils/formatPriceBRL";
 import { TbPhotoOff } from "react-icons/tb";
 import { cn } from "@/lib/utils";
-import EditProductButton from "../EditProductButton";
+import EditProductModal from "../EditProductModal";
 
 interface ProductItemProps {
   product: Product;
@@ -32,7 +32,7 @@ function ProductItem({ product }: ProductItemProps) {
 
       <div className="flex-1">
         <h3 className="text-xl font-semibold line-clamp-2">{product.title}</h3>
-        <div className="text-2xl font-bold mt-1 mb-2">
+        <div className="text-2xl font-bold mt-1 mb-2 truncate">
           {formatPriceBRL(product.price)}
         </div>
 
@@ -46,11 +46,14 @@ function ProductItem({ product }: ProductItemProps) {
             {isActive ? "Ativo" : "Inativo"}
           </span>
           <div className="flex gap-2">
-            <EditProductButton productId={product.id} defaultValues={{
-              title: product.title,
-              price: product.price,
-              image: product.image,
-            }} />
+            <EditProductModal
+              productId={product.id}
+              defaultValues={{
+                title: product.title,
+                price: product.price,
+                image: product.image,
+              }}
+            />
             <Button variant="ghost" size="icon">
               <Trash2 className="w-5 h-5 text-red-500" />
             </Button>

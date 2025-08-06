@@ -1,5 +1,5 @@
 import { screen, fireEvent } from "@testing-library/react";
-import EditProductButton from ".";
+import EditProductModal from ".";
 import "@testing-library/jest-dom";
 import { renderWithQueryClient } from "@/test/test-utils";
 
@@ -9,10 +9,10 @@ const defaultValues = {
   image: "",
 };
 
-describe("EditProductButton", () => {
+describe("EditProductModal", () => {
   it("deve abrir o modal ao clicar no botão de editar", async () => {
     renderWithQueryClient(
-      <EditProductButton productId={1} defaultValues={defaultValues} />
+      <EditProductModal productId={1} defaultValues={defaultValues} />
     );
     const openButton = screen.getByRole("button");
     fireEvent.click(openButton);
@@ -21,7 +21,7 @@ describe("EditProductButton", () => {
 
   it("deve mostrar os valores iniciais do formulário", async () => {
     renderWithQueryClient(
-      <EditProductButton productId={1} defaultValues={defaultValues} />
+      <EditProductModal productId={1} defaultValues={defaultValues} />
     );
     fireEvent.click(screen.getByRole("button"));
     expect(
@@ -36,7 +36,7 @@ describe("EditProductButton", () => {
 
   it("deve validar campos obrigatórios", async () => {
     renderWithQueryClient(
-      <EditProductButton productId={1} defaultValues={defaultValues} />
+      <EditProductModal productId={1} defaultValues={defaultValues} />
     );
     fireEvent.click(screen.getByRole("button"));
 
@@ -51,7 +51,7 @@ describe("EditProductButton", () => {
 
   it("deve desabilitar o botão de salvar se nada foi alterado", async () => {
     renderWithQueryClient(
-      <EditProductButton productId={1} defaultValues={defaultValues} />
+      <EditProductModal productId={1} defaultValues={defaultValues} />
     );
     fireEvent.click(screen.getByRole("button"));
     const saveButton = await screen.findByRole("button", {
@@ -62,7 +62,7 @@ describe("EditProductButton", () => {
 
   it("deve habilitar o botão de salvar se algum campo for alterado", async () => {
     renderWithQueryClient(
-      <EditProductButton productId={1} defaultValues={defaultValues} />
+      <EditProductModal productId={1} defaultValues={defaultValues} />
     );
     fireEvent.click(screen.getByRole("button"));
     const input = await screen.findByPlaceholderText("Digite o título");

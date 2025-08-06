@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { generateId } from "../utils/generateId";
 
 export interface CartItem {
+  cartItemId: string;
   id: number;
   title: string;
   price: number;
@@ -11,17 +13,14 @@ export interface CartItem {
 
 interface CartState {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
-  removeItem: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  addItem: (item: Omit<CartItem, "quantity" | "cartItemId">, quantity?: number) => void;
+  removeItem: (cartItemId: string) => void;
+  updateQuantity: (cartItemId: string, quantity: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
 }
 
-const isSameProduct = (
-  a: CartItem,
-  b: Omit<CartItem, "quantity">
-): boolean =>
+const isSameProduct = (a: CartItem, b: Omit<CartItem, "quantity" | "cartItemId">): boolean =>
   a.id === b.id &&
   a.title === b.title &&
   a.price === b.price &&
@@ -45,21 +44,23 @@ export const useCartStore = create<CartState>()(
             ),
           });
         } else {
-          set({ items: [...items, { ...item, quantity }] });
+          set({
+            items: [...items, { ...item, quantity, cartItemId: generateId() }],
+          });
         }
       },
 
-      removeItem: (id) => {
-        set({ items: get().items.filter((i) => i.id !== id) });
+      removeItem: (cartItemId) => {
+        set({ items: get().items.filter((i) => i.cartItemId !== cartItemId) });
       },
 
-      updateQuantity: (id, quantity) => {
+      updateQuantity: (cartItemId, quantity) => {
         if (quantity <= 0) {
-          get().removeItem(id);
+          get().removeItem(cartItemId);
         } else {
           set({
             items: get().items.map((i) =>
-              i.id === id ? { ...i, quantity } : i
+              i.cartItemId === cartItemId ? { ...i, quantity } : i
             ),
           });
         }

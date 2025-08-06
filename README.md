@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+# Triskin Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Aplicação modelo de e-commerce que permite listagem, edição e gerenciamento de produtos, com carrinho de compras persistente e processo de checkout simples.
 
-Currently, two official plugins are available:
+## 🚀 Instalando
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para instalar o Triskin Store, siga estas etapas:
 
-## Expanding the ESLint configuration
+### 1. Clone o projeto do GitHub:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+git clone https://github.com/emsmoraes/triskin-sotore.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Entre na pasta do projeto:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+cd triskin-sotore
 ```
+
+### 3. Instale as dependências:
+
+```sh
+yarn
+# ou
+npm install
+```
+
+## ☕ Usando
+
+Para rodar o projeto em modo desenvolvimento:
+
+```sh
+yarn dev
+# ou
+npm run dev
+```
+
+## 🧪 Testes
+
+Para rodar os testes unitários:
+
+```sh
+yarn test
+# ou
+npm test
+```
+
+## 💡 Explicações das estratégias
+
+- **Zustand:** Optei por utilizar Zustand pela performance, evitando re-renderizações desnecessárias, ao contrário do Context API, que poderia re-renderizar componentes ao redor.
+- **Shadcn:** Escolhi o Shadcn pela personalização simples e eficiente, integração direta com Tailwind e pela agilidade no desenvolvimento.
+- **Status ativo/inativo:** Como a API utilizada não possui um status de ativo/inativo, criei esse boolean com base no preço: valores ímpares indicam “ativo” e pares “inativo”.
+- **Filtragem:** Para filtragem da lista, preferi filtrar apenas o array em memória, já que o número de itens é pequeno e isso não impacta a performance; em cenários com grandes volumes, implementaria a filtragem via API.
+- **Formulários:** Utilizei React Hook Form com Zod para um controle mais robusto e seguro dos formulários.
+- **Carrinho:** No carrinho, mantive a lógica simples: um item é considerado o mesmo apenas se id, título, preço e imagem forem idênticos. Assim, qualquer alteração em um desses campos gera um novo item, mesmo que o anterior permaneça.
+- **React Query:** Escolhi o React Query pela praticidade, eliminando a necessidade de criar estados e funções manuais para requisições, além de contar com seu cache eficiente que otimiza o carregamento de dados.
+
+## 🤝 Criador
+
+Feito com ❤️ por Eduardo Meneses para a Triskin:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/emsmoraes" title="Eduardo Meneses">
+        <img src="https://avatars.githubusercontent.com/u/85969484?s=400&u=b0e89e575a7cb91fc9f8a69e126a9d7587aa9478&v=4" width="100px;" alt="Foto do Eduardo Meneses no GitHub"/><br>
+        <sub>
+          <b>Eduardo Meneses</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+## 📝 Licença
+
+Este projeto está sob licença. Veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.

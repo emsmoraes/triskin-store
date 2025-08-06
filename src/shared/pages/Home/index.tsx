@@ -1,7 +1,7 @@
 import ProductList from "./components/ProductList";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "@/shared/services";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SearchInput from "./components/SearchInput";
 
 function Home() {
@@ -16,9 +16,12 @@ function Home() {
     queryFn: getProducts,
   });
 
-  const filteredProducts = products?.filter((product) =>
-    product.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const filteredProducts = useMemo(() => {
+    if (!products) return [];
+    return products.filter((product) =>
+      product.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }, [products, searchValue]);
 
   return (
     <div className="w-full p-4 items-center gap-2 space-y-4">

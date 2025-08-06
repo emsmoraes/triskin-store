@@ -36,6 +36,7 @@ function ProductItem({ product }: ProductItemProps) {
           <img
             src={product.image}
             alt={product.title}
+            draggable={false}
             className="object-contain w-full h-full bg-white group-hover:scale-105 transition-transform"
           />
         ) : (

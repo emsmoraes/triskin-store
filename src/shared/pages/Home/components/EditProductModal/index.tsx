@@ -150,6 +150,7 @@ function EditProductModal({ defaultValues, productId }: EditProductModalProps) {
           <Button
             type="submit"
             className="h-[40px] max-h-full px-5 text-[16px] font-[400] [&_svg:not([class*='size-'])]:size-6 mt-5"
+            variant={"gradient"}
             disabled={!isFormDirty || mutation.isPending}
           >
             {mutation.isPending ? (
